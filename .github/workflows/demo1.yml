@@ -3,7 +3,20 @@ on:
   pull_request:
     types:
       - opened
+    branches: # this workflow is triggered if i make a pull-request when i work on main or dev or feature branches
+      - main
+      - 'dev-*' # dev-new or dev-this-is-new
+      - 'feature/**' # feature/new or feature/new/button
   workflow_dispatch:
+  push:
+    branches: # this workflow is triggered if i push to main or dev or feature branches
+      - main
+      - 'dev-*' # dev-new or dev-this-is-new
+      - 'feature/**' # feature/new or feature/new/button
+
+    paths-ignore:
+      - '.github/workflows/*' # this workflow is not triggered if i change in any file in workflows folder
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
